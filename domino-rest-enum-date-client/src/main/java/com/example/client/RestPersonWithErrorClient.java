@@ -29,9 +29,8 @@ import com.example.api.PersonDto;
 import com.example.api.PersonEndpoint;
 
 @RequestFactory(serviceRoot = "http://localhost:9090/server")
-public interface RestPersonWithErrorClient extends PersonWithErrorClient {
+public interface RestPersonWithErrorClient {
 
-	@Override
 	@GET
 	@Path(PersonEndpoint.PERSON_WITH_ERROR_LIST)
 	List<PersonDto> getPersonsWithError();

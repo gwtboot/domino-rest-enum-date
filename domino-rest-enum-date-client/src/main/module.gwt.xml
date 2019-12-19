@@ -17,8 +17,8 @@
  | under the License.
 -->
 <module rename-to="example">
-   <inherits name="com.github.gwtboot.starter.RestyGwtStarter"/>
    <inherits name="com.example.Person"/>
-   
+   <inherits name="org.dominokit.domino.rest.GwtRest"/>
+
    <entry-point class='com.example.client.BasicGwtEntryPoint'/>
 </module>
