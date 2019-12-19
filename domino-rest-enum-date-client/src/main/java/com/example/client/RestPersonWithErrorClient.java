@@ -20,20 +20,16 @@ package com.example.client;
 
 import java.util.List;
 
-import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
-import javax.ws.rs.core.MediaType;
 
-import org.fusesource.restygwt.client.DirectRestService;
+import org.dominokit.domino.rest.shared.request.service.annotations.RequestFactory;
 
 import com.example.api.PersonDto;
 import com.example.api.PersonEndpoint;
 
-@Produces(MediaType.APPLICATION_JSON)
-@Consumes(MediaType.APPLICATION_JSON)
-public interface DirectRestPersonWithErrorClient extends DirectRestService, PersonWithErrorClient {
+@RequestFactory(serviceRoot = "http://localhost:9090/server")
+public interface RestPersonWithErrorClient extends PersonWithErrorClient {
 
 	@Override
 	@GET

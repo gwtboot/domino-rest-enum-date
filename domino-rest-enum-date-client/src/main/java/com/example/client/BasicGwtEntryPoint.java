@@ -19,21 +19,13 @@
 package com.example.client;
 
 import java.util.Date;
-import java.util.List;
 import java.util.logging.Logger;
 
-import org.fusesource.restygwt.client.Defaults;
-import org.fusesource.restygwt.client.Method;
-import org.fusesource.restygwt.client.MethodCallback;
-import org.fusesource.restygwt.client.REST;
-import org.fusesource.restygwt.client.Resource;
-import org.fusesource.restygwt.client.RestServiceProxy;
+import org.dominokit.domino.rest.DominoRestConfig;
+import org.gwtproject.core.client.EntryPoint;
 
 import com.example.api.PersonDto;
-import com.example.api.PersonEndpoint;
 import com.example.api.PersonType;
-import com.google.gwt.core.client.EntryPoint;
-import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.RootPanel;
@@ -41,8 +33,6 @@ import com.google.gwt.user.client.ui.RootPanel;
 public class BasicGwtEntryPoint implements EntryPoint {
 
 	private static Logger logger = Logger.getLogger(BasicGwtEntryPoint.class.getName());
-
-	private static final String SERVER_CONTEXT_PATH = "http://localhost:9090/server";
 
 	@Override
 	public void onModuleLoad() {
@@ -55,8 +45,6 @@ public class BasicGwtEntryPoint implements EntryPoint {
 		boringPerson.setDate(new Date());
 		boringPerson.setName("Test");
 		boringPerson.setPersonType(PersonType.BORING);
-
-		Defaults.setDateFormat(PersonEndpoint.DATE_FORMAT);
 
 		FlowPanel flowPanel = new FlowPanel();
 
@@ -72,28 +60,18 @@ public class BasicGwtEntryPoint implements EntryPoint {
 	private Button executePersonList(PersonDto person) {
 		Button personListButton = new Button("Click me: " + person.getPersonType().name());
 
+		DominoRestConfig.initDefaults();
+
 		personListButton.addClickHandler(clickEvent -> {
 			logger.info("Hello World: executePersonList");
 
-			// We can use general client without the extension
-			// to RestyGwt RestService
-			PersonClient personClient = GWT.create(RestPersonClient.class);
-			Resource resource = new Resource(SERVER_CONTEXT_PATH);
-			((RestServiceProxy) personClient).setResource(resource);
-
-			personClient.getPersons(new MethodCallback<List<PersonDto>>() {
-				@Override
-				public void onSuccess(Method method, List<PersonDto> response) {
-					response.forEach(person -> logger.info("Person: " + person.getName() + " - Date: "
-							+ person.getDate() + " - Type: " + person.getPersonType()));
-				}
-
-				@Override
-				public void onFailure(Method method, Throwable exception) {
-					logger.info("Error: " + exception);
-					throw new RuntimeException(exception);
-				}
-			});
+			RestPersonClientFactory.INSTANCE.getPersons().onSuccess(person -> {
+				response.forEach(person -> logger.info("Person: " + person.getName() + " - Date: " + person.getDate()
+						+ " - Type: " + person.getPersonType()));
+			}).onFailed(failedResponse -> {
+				logger.info("Error: " + exception);
+				throw new RuntimeException(exception);
+			}).send();
 		});
 
 		return personListButton;
@@ -105,25 +83,13 @@ public class BasicGwtEntryPoint implements EntryPoint {
 		personWithErrorListButton.addClickHandler(clickEvent -> {
 			logger.info("Hello World: executePersonWithErrorList");
 
-			DirectRestPersonWithErrorClient personClient = GWT.create(DirectRestPersonWithErrorClient.class);
-			Resource resource = new Resource(SERVER_CONTEXT_PATH);
-			((RestServiceProxy) personClient).setResource(resource);
+			RestPersonWithErrorClientFactory.INSTANCE.getPersons().onSuccess(person -> {
+				response.forEach(person -> logger.info("Person: " + person.getName() + " - Date: " + person.getDate()
+						+ " - Type: " + person.getPersonType()));
+			}).onFailed(failedResponse -> {
+				logger.info("Error: " + exception + "\nMessages: " + method.getResponse().getText());
+			}).send();
 
-			// We need to use specific client for RestyGwt
-			// DirectRestService
-			REST.withCallback(new MethodCallback<List<PersonDto>>() {
-				@Override
-				public void onFailure(Method method, Throwable exception) {
-					logger.info("Error: " + exception + "\nMessages: " + method.getResponse().getText());
-				}
-
-				@Override
-				public void onSuccess(Method method, List<PersonDto> response) {
-					response.forEach(person -> logger.info("Person: " + person.getName() + " - Date: "
-							+ person.getDate() + " - Type: " + person.getPersonType()));
-				}
-
-			}).call(personClient).getPersonsWithError();
 		});
 
 		return personWithErrorListButton;
