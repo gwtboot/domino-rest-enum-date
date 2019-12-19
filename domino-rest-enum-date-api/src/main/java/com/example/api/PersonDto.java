@@ -22,7 +22,9 @@ import java.util.Date;
 import java.util.logging.Logger;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import org.dominokit.jacksonapt.annotation.JSONMapper;
 
+@JSONMapper
 public class PersonDto {
 
 	private static Logger logger = Logger.getLogger(PersonDto.class.getName());
