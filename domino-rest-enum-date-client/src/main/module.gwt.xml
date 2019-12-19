@@ -18,6 +18,7 @@
 -->
 <module rename-to="example">
    <inherits name="com.example.Person"/>
+   <inherits name="com.github.gwtboot.starter.Starter"/>
    <inherits name="org.dominokit.domino.rest.GwtRest"/>
 
    <entry-point class='com.example.client.BasicGwtEntryPoint'/>
