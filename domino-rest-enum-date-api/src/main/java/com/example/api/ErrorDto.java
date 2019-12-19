@@ -18,6 +18,9 @@
  */
 package com.example.api;
 
+import org.dominokit.jacksonapt.annotation.JSONMapper;
+
+@JSONMapper
 public class ErrorDto {
 
 	private String status;

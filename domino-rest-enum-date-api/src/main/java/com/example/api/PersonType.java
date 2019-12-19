@@ -19,7 +19,9 @@
 package com.example.api;
 
 import com.fasterxml.jackson.annotation.JsonValue;
+import org.dominokit.jacksonapt.annotation.JSONMapper;
 
+@JSONMapper
 public enum PersonType {
 
 	COOL("cool"), BORING("boring");

@@ -29,9 +29,8 @@ import com.example.api.PersonDto;
 import com.example.api.PersonEndpoint;
 
 @RequestFactory(serviceRoot = "http://localhost:9090/server")
-public interface RestPersonClient extends PersonClient {
+public interface RestPersonClient {
 
-	@Override
 	@GET
 	@Path(PersonEndpoint.PERSON_LIST)
 	List<PersonDto> getPersons();

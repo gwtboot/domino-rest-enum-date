@@ -65,12 +65,11 @@ public class BasicGwtEntryPoint implements EntryPoint {
 		personListButton.addClickHandler(clickEvent -> {
 			logger.info("Hello World: executePersonList");
 
-			RestPersonClientFactory.INSTANCE.getPersons().onSuccess(person -> {
-				response.forEach(person -> logger.info("Person: " + person.getName() + " - Date: " + person.getDate()
-						+ " - Type: " + person.getPersonType()));
+			RestPersonClientFactory.INSTANCE.getPersons().onSuccess(response -> {
+				response.forEach(p -> logger.info("Person: " + p.getName() + " - Date: " + p.getDate()
+						+ " - Type: " + p.getPersonType()));
 			}).onFailed(failedResponse -> {
-				logger.info("Error: " + exception);
-				throw new RuntimeException(exception);
+				logger.info("Error: " + failedResponse.getStatusCode() + "\nMessages: " + failedResponse.getStatusText());
 			}).send();
 		});
 
@@ -83,11 +82,11 @@ public class BasicGwtEntryPoint implements EntryPoint {
 		personWithErrorListButton.addClickHandler(clickEvent -> {
 			logger.info("Hello World: executePersonWithErrorList");
 
-			RestPersonWithErrorClientFactory.INSTANCE.getPersons().onSuccess(person -> {
-				response.forEach(person -> logger.info("Person: " + person.getName() + " - Date: " + person.getDate()
-						+ " - Type: " + person.getPersonType()));
+			RestPersonWithErrorClientFactory.INSTANCE.getPersonsWithError().onSuccess(response -> {
+				response.forEach(p -> logger.info("Person: " + p.getName() + " - Date: " + p.getDate()
+						+ " - Type: " + p.getPersonType()));
 			}).onFailed(failedResponse -> {
-				logger.info("Error: " + exception + "\nMessages: " + method.getResponse().getText());
+				logger.info("Error: " + failedResponse.getStatusCode() + "\nMessages: " + failedResponse.getStatusText());
 			}).send();
 
 		});

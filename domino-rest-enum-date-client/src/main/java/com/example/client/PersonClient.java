@@ -21,6 +21,11 @@ package com.example.client;
 import java.util.List;
 
 import com.example.api.PersonDto;
+import com.example.api.PersonEndpoint;
+import org.dominokit.domino.rest.shared.request.service.annotations.RequestFactory;
+
+import javax.ws.rs.GET;
+import javax.ws.rs.Path;
 
 public interface PersonClient {
 
