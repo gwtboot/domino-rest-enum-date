@@ -23,6 +23,7 @@ import java.util.logging.Logger;
 
 import org.dominokit.domino.rest.DominoRestConfig;
 
+import com.example.api.ErrorDto;
 import com.example.api.PersonDto;
 import com.example.api.PersonType;
 import com.google.gwt.core.client.EntryPoint;
@@ -43,15 +44,15 @@ public class BasicGwtEntryPoint implements EntryPoint {
 		coolPerson.setName("Lofi");
 		coolPerson.setPersonType(PersonType.COOL);
 
-		PersonDto boringPerson = new PersonDto();
-		boringPerson.setDate(new Date());
-		boringPerson.setName("Test");
-		boringPerson.setPersonType(PersonType.BORING);
+		ErrorDto boringError = new ErrorDto();
+		boringError.setDetail(new Date().toString());
+		boringError.setErrorcode("Test");
+		boringError.setStatus(PersonType.BORING.toString());
 
 		FlowPanel flowPanel = new FlowPanel();
 
 		Button personListButton = executePersonList(coolPerson);
-		Button personWithErrorListButton = executePersonWithErrorList(boringPerson);
+		Button personWithErrorListButton = executePersonWithErrorList(boringError);
 
 		flowPanel.add(personListButton);
 		flowPanel.add(personWithErrorListButton);
@@ -65,7 +66,7 @@ public class BasicGwtEntryPoint implements EntryPoint {
 		personListButton.addClickHandler(clickEvent -> {
 			logger.info("Hello World: executePersonList");
 
-			RestPersonClientFactory.INSTANCE.getPersons().onSuccess(response -> {
+			PersonClientFactory.INSTANCE.getPersons().onSuccess(response -> {
 				response.forEach(p -> logger
 						.info("Person: " + p.getName() + " - Date: " + p.getDate() + " - Type: " + p.getPersonType()));
 			}).onFailed(failedResponse -> {
@@ -77,15 +78,14 @@ public class BasicGwtEntryPoint implements EntryPoint {
 		return personListButton;
 	}
 
-	private Button executePersonWithErrorList(PersonDto person) {
-		Button personWithErrorListButton = new Button("Click me: " + person.getPersonType().name());
+	private Button executePersonWithErrorList(ErrorDto error) {
+		Button personWithErrorListButton = new Button("Click me: " + error.getDetail());
 
 		personWithErrorListButton.addClickHandler(clickEvent -> {
 			logger.info("Hello World: executePersonWithErrorList");
 
-			RestPersonWithErrorClientFactory.INSTANCE.getPersonsWithError().onSuccess(response -> {
-				response.forEach(p -> logger
-						.info("Person: " + p.getName() + " - Date: " + p.getDate() + " - Type: " + p.getPersonType()));
+			PersonClientFactory.INSTANCE.getPersonsWithError().onSuccess(response -> {
+				response.forEach(e -> logger.info("Error Code: " + e.getErrorcode()));
 			}).onFailed(failedResponse -> {
 				logger.info(
 						"Error: " + failedResponse.getStatusCode() + "\nMessages: " + failedResponse.getStatusText());

@@ -26,19 +26,22 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.api.ErrorDto;
+import com.example.api.PersonApi;
 import com.example.api.PersonDto;
 import com.example.api.PersonEndpoint;
 
 @CrossOrigin
-@RestController 
-public class PersonController {
-	
+@RestController
+public class PersonController implements PersonApi {
+
 	private PersonService personService;
 
 	public PersonController(PersonService personService) {
 		this.personService = personService;
 	}
 
+	@Override
 	@RequestMapping(method = RequestMethod.GET, value = PersonEndpoint.PERSON_LIST)
 	public List<PersonDto> getPersons() {
 		List<PersonDto> persons = personService.getPersons();
@@ -46,8 +49,9 @@ public class PersonController {
 		return persons;
 	}
 
+	@Override
 	@RequestMapping(method = RequestMethod.GET, value = PersonEndpoint.PERSON_WITH_ERROR_LIST)
-	public List<PersonDto> getPersonsWithError() throws AccessDeniedException {
+	public List<ErrorDto> getPersonsWithError() throws AccessDeniedException {
 		throw new AccessDeniedException("Cannot access the file");
 	}
 

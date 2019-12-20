@@ -18,12 +18,27 @@
  */
 package com.example.client;
 
+import java.nio.file.AccessDeniedException;
 import java.util.List;
 
-import com.example.api.PersonDto;
+import javax.ws.rs.GET;
+import javax.ws.rs.Path;
 
+import org.dominokit.domino.rest.shared.request.service.annotations.RequestFactory;
+
+import com.example.api.ErrorDto;
+import com.example.api.PersonDto;
+import com.example.api.PersonEndpoint;
+
+@RequestFactory(serviceRoot = "http://localhost:9090/server")
 public interface PersonClient {
 
+	@GET
+	@Path(PersonEndpoint.PERSON_LIST)
 	List<PersonDto> getPersons();
+
+	@GET
+	@Path(PersonEndpoint.PERSON_WITH_ERROR_LIST)
+	List<ErrorDto> getPersonsWithError() throws AccessDeniedException;
 
 }
