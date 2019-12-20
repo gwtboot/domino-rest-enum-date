@@ -30,7 +30,7 @@ import com.example.api.ErrorDto;
 import com.example.api.PersonDto;
 import com.example.api.PersonEndpoint;
 
-@RequestFactory(serviceRoot = "http://localhost:9090/server")
+@RequestFactory
 public interface PersonClient {
 
 	@GET

@@ -25,6 +25,7 @@ import org.dominokit.domino.rest.DominoRestConfig;
 
 import com.example.api.ErrorDto;
 import com.example.api.PersonDto;
+import com.example.api.PersonEndpoint;
 import com.example.api.PersonType;
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.user.client.ui.Button;
@@ -38,6 +39,8 @@ public class BasicGwtEntryPoint implements EntryPoint {
 	@Override
 	public void onModuleLoad() {
 		DominoRestConfig.initDefaults();
+
+		DominoRestConfig.getInstance().setDefaultServiceRoot(PersonEndpoint.SERVER_CONTEXT_PATH);
 
 		PersonDto coolPerson = new PersonDto();
 		coolPerson.setDate(new Date());
