@@ -18,8 +18,6 @@
  */
 package com.example.api;
 
-import com.fasterxml.jackson.annotation.JsonValue;
-
 public enum PersonType {
 
 	COOL("cool"), BORING("boring");
@@ -30,7 +28,6 @@ public enum PersonType {
 		this.type = type;
 	}
 
-	@JsonValue
 	public String getType() {
 		return type;
 	}
