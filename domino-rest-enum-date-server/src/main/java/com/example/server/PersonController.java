@@ -21,6 +21,8 @@ package com.example.server;
 import java.nio.file.AccessDeniedException;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -35,6 +37,8 @@ import com.example.api.PersonEndpoint;
 @RestController
 public class PersonController implements PersonApi {
 
+	private static final Logger logger = LoggerFactory.getLogger(PersonController.class);
+
 	private PersonService personService;
 
 	public PersonController(PersonService personService) {
@@ -44,6 +48,8 @@ public class PersonController implements PersonApi {
 	@Override
 	@RequestMapping(method = RequestMethod.GET, value = PersonEndpoint.PERSON_LIST)
 	public List<PersonDto> getPersons() {
+		logger.info("Controller: getPersons");
+
 		List<PersonDto> persons = personService.getPersons();
 
 		return persons;
@@ -52,6 +58,7 @@ public class PersonController implements PersonApi {
 	@Override
 	@RequestMapping(method = RequestMethod.GET, value = PersonEndpoint.PERSON_WITH_ERROR_LIST)
 	public List<ErrorDto> getPersonsWithError() throws AccessDeniedException {
+		logger.info("Controller: getPersonsWithError");
 		throw new AccessDeniedException("Cannot access the file");
 	}
 
