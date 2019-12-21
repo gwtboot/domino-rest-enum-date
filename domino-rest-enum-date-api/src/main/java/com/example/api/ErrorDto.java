@@ -32,6 +32,9 @@ public class ErrorDto {
 	private String detail;
 
 	public String getMessage() {
+		if (message == null || message.equals("")) {
+			message = "Empty Message...";
+		}
 		return message;
 	}
 

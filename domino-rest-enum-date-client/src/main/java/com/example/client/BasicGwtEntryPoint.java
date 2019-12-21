@@ -90,8 +90,8 @@ public class BasicGwtEntryPoint implements EntryPoint {
 			PersonClientFactory.INSTANCE.getPersonsWithError().onSuccess(response -> {
 				response.forEach(e -> logger.info("Error Code: " + e.getErrorcode()));
 			}).onFailed(failedResponse -> {
-				logger.info(
-						"Error: " + failedResponse.getStatusCode() + "\nMessages: " + failedResponse.getStatusText());
+				logger.info("Error: " + failedResponse.getStatusCode() + "\nObject: " + failedResponse.toString()
+						+ "\nMessages: " + failedResponse.getBody());
 			}).send();
 
 		});
