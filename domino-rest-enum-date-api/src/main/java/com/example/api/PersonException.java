@@ -18,12 +18,12 @@
  */
 package com.example.api;
 
-import java.util.List;
+public class PersonException extends Exception {
 
-public interface PersonApi {
+	private static final long serialVersionUID = 1L;
 
-	List<PersonDto> getPersons();
-
-	List<ErrorDto> getPersonsWithError() throws PersonException;
+	public PersonException(String message) {
+		super(message);
+	}
 
 }

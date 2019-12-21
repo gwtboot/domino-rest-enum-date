@@ -18,7 +18,6 @@
  */
 package com.example.client;
 
-import java.nio.file.AccessDeniedException;
 import java.util.List;
 
 import javax.ws.rs.GET;
@@ -29,6 +28,7 @@ import org.dominokit.domino.rest.shared.request.service.annotations.RequestFacto
 import com.example.api.ErrorDto;
 import com.example.api.PersonDto;
 import com.example.api.PersonEndpoint;
+import com.example.api.PersonException;
 
 @RequestFactory
 public interface PersonClient {
@@ -39,6 +39,6 @@ public interface PersonClient {
 
 	@GET
 	@Path(PersonEndpoint.PERSON_WITH_ERROR_LIST)
-	List<ErrorDto> getPersonsWithError() throws AccessDeniedException;
+	List<ErrorDto> getPersonsWithError() throws PersonException;
 
 }

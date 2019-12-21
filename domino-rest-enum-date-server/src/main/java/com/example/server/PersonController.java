@@ -18,7 +18,6 @@
  */
 package com.example.server;
 
-import java.nio.file.AccessDeniedException;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -32,6 +31,7 @@ import com.example.api.ErrorDto;
 import com.example.api.PersonApi;
 import com.example.api.PersonDto;
 import com.example.api.PersonEndpoint;
+import com.example.api.PersonException;
 
 @CrossOrigin
 @RestController
@@ -57,9 +57,9 @@ public class PersonController implements PersonApi {
 
 	@Override
 	@RequestMapping(method = RequestMethod.GET, value = PersonEndpoint.PERSON_WITH_ERROR_LIST)
-	public List<ErrorDto> getPersonsWithError() throws AccessDeniedException {
+	public List<ErrorDto> getPersonsWithError() throws PersonException {
 		logger.info("Controller: getPersonsWithError");
-		throw new AccessDeniedException("Cannot access the file");
+		throw new PersonException("Cannot access the file");
 	}
 
 }
