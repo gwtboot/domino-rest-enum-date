@@ -20,7 +20,7 @@ and you can mock all the call to the REST APIs from Server part with simple inte
 
 ## API
 For the APIs you just need to run mvn:clean install to deploy your API to the local
-Maven repository. The API modul is your interface between the Client and the Server part.
+Maven repository. The API module is your interface between the Client and the Server part. If you want to reuse classes from both side Client and Server you should put them in this API module. Validation classes are also candidates to put in this API module.
 
 ## Client
 For the Client part you can start the standard process for GWT just like it is shown in the example from GWT Boot: 
