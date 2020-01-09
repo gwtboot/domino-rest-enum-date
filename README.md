@@ -49,6 +49,12 @@ If you want to run the OpenAPI go to this address:
 http://localhost:9090/server/swagger-ui.html
 ```
 
+If you want to run the simple HTML index file, go to this address:
+
+```
+http://localhost:9090/server/index.html
+```
+
 
 That's it. You will have two clean separate processes which are independent of each other. All the 
 Maven libs are also independent, so it won't mix between the Client and the Server part. 
