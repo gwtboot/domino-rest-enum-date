@@ -26,17 +26,20 @@ import javax.ws.rs.Path;
 import org.dominokit.domino.rest.shared.request.service.annotations.RequestFactory;
 
 import com.example.api.ErrorDto;
+import com.example.api.PersonApi;
 import com.example.api.PersonDto;
 import com.example.api.PersonEndpoint;
 import com.example.api.PersonException;
 
 @RequestFactory
-public interface PersonClient {
+public interface PersonClient extends PersonApi {
 
+	@Override
 	@GET
 	@Path(PersonEndpoint.PERSON_LIST)
 	List<PersonDto> getPersons();
 
+	@Override
 	@GET
 	@Path(PersonEndpoint.PERSON_WITH_ERROR_LIST)
 	List<ErrorDto> getPersonsWithError() throws PersonException;
