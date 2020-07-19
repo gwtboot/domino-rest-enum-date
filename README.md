@@ -166,7 +166,7 @@ java -jar domino-rest-enum-date-server-1.0.0-SNAPSHOT.jar
 
 # Epilog
 
-Advantages of this structure in comparison with the structure in [Spring Boot with GWT](https://github.com/gwtboot/gwt-boot-samples/tree/master/gwt-boot-sample-basic-with-spring-boot):
+Advantages of this structure in comparison with the structure in [Spring Boot with GWT](https://github.com/gwtboot/gwt-boot-samples/tree/1.0.0-SNAPSHOT-for-2.8.2/gwt-boot-sample-basic-with-spring-boot):
 - Clean separation of the modules and each modules are independent of each other.
 - The GWT module is clean and pure GWT Maven libs and is ready for GWT 3.
 - The Spring Boot module is completely pure Spring Boot, no other Maven libs is included.
