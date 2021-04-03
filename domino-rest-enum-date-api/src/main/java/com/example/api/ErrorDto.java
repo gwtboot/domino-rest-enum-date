@@ -18,7 +18,7 @@
  */
 package com.example.api;
 
-import org.dominokit.jacksonapt.annotation.JSONMapper;
+import org.dominokit.jackson.annotation.JSONMapper;
 
 @JSONMapper
 public class ErrorDto {

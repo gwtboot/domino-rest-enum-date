@@ -21,7 +21,7 @@ package com.example.client;
 import java.util.Date;
 import java.util.logging.Logger;
 
-import org.dominokit.domino.rest.DominoRestConfig;
+import org.dominokit.rest.DominoRestConfig;
 
 import com.example.api.ErrorDto;
 import com.example.api.PersonDto;

@@ -21,8 +21,9 @@ package com.example.api;
 import java.util.Date;
 import java.util.logging.Logger;
 
+import org.dominokit.jackson.annotation.JSONMapper;
+
 import com.fasterxml.jackson.annotation.JsonFormat;
-import org.dominokit.jacksonapt.annotation.JSONMapper;
 
 @JSONMapper
 public class PersonDto {
