@@ -28,9 +28,8 @@
 	<packaging>pom</packaging>
 
 	<modules>
-		<module>domino-rest-enum-date-api</module>
+		<module>domino-rest-enum-date-shared</module>
 		<module>domino-rest-enum-date-client</module>
 		<module>domino-rest-enum-date-server</module>
 	</modules>
-
 </project>

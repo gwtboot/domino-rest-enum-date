@@ -10,7 +10,7 @@ This example shows how to structure your Maven modules for a development toward 
 # Modules
 
 There are three modules available:
-1. _API_: domino-rest-enum-date-api
+1. _Shared_: domino-rest-enum-date-shared
 2. _Client / Web browser with GWT_: domino-rest-enum-date-client
 3. _Server with Spring Boot_: domino-rest-enum-date-server
 
@@ -20,9 +20,9 @@ On the development time you should start two processes: Client and Server. But t
 not a must. If you just need to build your UI you only need to start the Client part
 and you can mock all the call to the REST APIs from Server part with simple interfaces.
 
-## API
-For the APIs you just need to run mvn:clean install to deploy your API to the local
-Maven repository. The API module is your interface between the Client and the Server part. If you want to reuse classes from both side Client and Server you should put them in this API module. Validation classes are also candidates to put in this API module.
+## Shared
+For the Shared module you just need to run mvn:clean install to deploy your Shared module to the local
+Maven repository. The Shared module is your interface between the Client and the Server part. If you want to reuse classes from both side Client and Server you should put them in this Shared module. Validation classes are also candidates to put in this Shared module.
 
 ## Client
 For the Client part you can start the standard process for GWT just like it is shown in the example from GWT Boot: 
@@ -171,5 +171,3 @@ Advantages of this structure in comparison with the structure in [Spring Boot wi
 - The GWT module is clean and pure GWT Maven libs and is ready for GWT 3.
 - The Spring Boot module is completely pure Spring Boot, no other Maven libs is included.
 - In the deployment you just need to start the Server module with Spring Boot as you include the transpiled JavaScript automatically from the dependency from the Client module.
-
-
