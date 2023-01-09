@@ -1,7 +1,7 @@
 # Domino REST with Spring Boot: domino-rest-enum-date
 Domino REST Example for Date and Enum with Spring Boot.
 
-[![Build Status](https://travis-ci.com/gwtboot/domino-rest-enum-date.svg?branch=master)](https://travis-ci.com/gwtboot/domino-rest-enum-date)
+![Build Status](https://github.com/gwtboot/domino-rest-enum-date/actions/workflows/maven.yml/badge.svg)
 
 This example uses GWT Boot: https://github.com/gwtboot/gwt-boot-samples
 
